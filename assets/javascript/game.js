@@ -16,9 +16,18 @@ var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l
 var wins = 0;
 var losses = 0;
 var counter = 0;
-var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+var computerGuess;
+// var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 console.log(computerGuess);
 
+function newRound() {
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+    $("#guesses-log-text").empty();
+    $("#guesses-log-text").append("Guesses: ");
+}
+
+newRound();
 
 //This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
@@ -33,7 +42,8 @@ document.onkeyup = function (event) {
             wins++;
             alert("you win! the answer is " + computerGuess);
             counter = 0;
-            // var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            //  computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            newRound();
         }
         else {
             counter++;
@@ -41,13 +51,12 @@ document.onkeyup = function (event) {
                 losses++;
                 alert("you lose! the answer is " + computerGuess);
                 counter = 0;
+                // computerGuess;
+                newRound();
             }
         }
     }
-
-
-
-
+    
     //Display the user and computer guesses, and wins/losses
 
     userChoiceText.textContent = "You chose: " + userGuess;
@@ -56,5 +65,4 @@ document.onkeyup = function (event) {
     guessesText.textContent = "guesses (out of 5): " + counter;
     computerChoiceText.textContent = "computer choice " + computerGuess;
     // guessesText.textContent = "guessed already ";
-        // guessesthus.textContent.prepend = "Guesses so far " + guessthus;
 }
